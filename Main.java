@@ -1,3 +1,7 @@
+/*
+	Anderson Vieira's solution
+	Don't copy this, try for yourself
+*/
 import java.io.*;
 
 public class Main{
