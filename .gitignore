@@ -4,3 +4,9 @@ statements/
 # Files
 in
 out
+a.out
+a.exe
+
+# IDE
+.vscode
+.idea
