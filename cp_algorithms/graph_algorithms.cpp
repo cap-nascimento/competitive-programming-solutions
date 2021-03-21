@@ -2,6 +2,8 @@
     Code to implement various algorithms to use on graphs.
 */
 #include <bits/stdc++.h>
+#define MAX 1010
+#define oo INT_MAX
 using namespace std;
 
 /*
@@ -11,6 +13,7 @@ using namespace std;
 */
 
 /*
+    adj -> adjacency matrix to some algorithms
     G -> the graph (0-indexed)
     n -> number of vertices
     m -> number of edges
@@ -18,22 +21,38 @@ using namespace std;
 class Graph{
     public:
         vector<vector<pair<int, int>>> G;
-        int n, m;
+        int n, m, **adj;
         Graph(int, int);
         void set_edge(int, int, int);
         void dfs();
         void bfs();
 };
 
-Graph::Graph(int _n, int _m){
-    this->n = _n;
-    this->m = _m;
+Graph::Graph(int n, int m){
+    // set number of vertices
+    this->n = n;
+    // set number of edges
+    this->m = m;
+    // init adjacency list
     this->G.assign(n, vector<pair<int, int>>());
+    // init adjacency matrix
+    this->adj = new int*[n];
+    for(int i=0;i<n;i++){
+        this->adj[i] = new int[m];
+        for(int j=0;j<m;j++){
+            this->adj[i][j] = oo;
+        }
+    }
 }
 
 void Graph::set_edge(int u, int v, int w){
+    // set edge on direction u -> v
     this->G[u].push_back(make_pair(v, w));
+    // set edge on direction v -> u
     this->G[v].push_back(make_pair(u, w));
+    // set edge on adjacency matrix (undirected too)
+    this->adj[u][v] = w;
+    this->adj[v][u] = w;
 }
 
 void Graph::dfs(){
@@ -115,6 +134,25 @@ int shortest_path(int s, int d, Graph graph){
     return dist[d] == INT_MAX ? -1 : dist[d];
 }
 
+/*
+    All Pair Shortest Path Floyd-Warshall
+
+    Runs on an adjacency matrix
+*/
+
+void floyd_warshall(Graph graph){
+    for(int k=0;k<graph.n;k++){
+        for(int i=0;i<graph.n;i++){
+            for(int j=0;j<graph.n;j++){
+                if(graph.adj[i][k] < oo &&
+                    graph.adj[k][j] < oo){
+                    graph.adj[i][j] = min(graph.adj[i][j], graph.adj[i][k]+graph.adj[k][j]);
+                }
+            }
+        }
+    }
+}
+
 int main(){
 
     Graph graph(9, 10);
@@ -133,7 +171,14 @@ int main(){
     //graph.dfs();
     //graph.bfs();
 
-    cout << shortest_path(0, 2, graph) << endl;
+    // Dijkstra example
+    cout << "Shortest path using Dijkstra's (" << 2 << "->" << 8 << "): ";
+    cout << shortest_path(2, 8, graph) << endl;
+
+    // Floyd-Warshall example
+    cout << "Shortest path using Floyd-Warshall's (" << 2 << "->" << 8 << "): ";
+    floyd_warshall(graph);
+    cout << graph.adj[2][8] << endl;
 
     return 0;
 }
