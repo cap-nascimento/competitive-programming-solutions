@@ -1,99 +1,7 @@
 /*
     Code to implement various algorithms to use on graphs.
 */
-#include <bits/stdc++.h>
-#define MAX 1010
-#define oo INT_MAX
-using namespace std;
-
-/*
-****************************************
-*   Common classes to the algorithms   *
-****************************************
-*/
-
-/*
-    adj -> adjacency matrix to some algorithms
-    G -> the graph (0-indexed)
-    n -> number of vertices
-    m -> number of edges
-*/
-class Graph{
-    public:
-        vector<vector<pair<int, int>>> G;
-        int n, m, **adj;
-        Graph(int, int);
-        void set_edge(int, int, int);
-        void dfs();
-        void bfs();
-};
-
-Graph::Graph(int n, int m){
-    // set number of vertices
-    this->n = n;
-    // set number of edges
-    this->m = m;
-    // init adjacency list
-    this->G.assign(n, vector<pair<int, int>>());
-    // init adjacency matrix
-    this->adj = new int*[n];
-    for(int i=0;i<n;i++){
-        this->adj[i] = new int[m];
-        for(int j=0;j<m;j++){
-            this->adj[i][j] = oo;
-        }
-    }
-}
-
-void Graph::set_edge(int u, int v, int w){
-    // set edge on direction u -> v
-    this->G[u].push_back(make_pair(v, w));
-    // set edge on direction v -> u
-    this->G[v].push_back(make_pair(u, w));
-    // set edge on adjacency matrix (undirected too)
-    this->adj[u][v] = w;
-    this->adj[v][u] = w;
-}
-
-void Graph::dfs(){
-    bool visited[n] = {false};
-    stack<int> s;
-    s.push(0);
-    visited[0] = true;
-    while(!s.empty()){
-        int u = s.top();
-        s.pop();
-        cout << u << " ";
-        for(pair<int, int> p : G[u]){
-            int v = p.first;
-            if(!visited[v]){
-                visited[v] = true;
-                s.push(v);
-            }
-
-        }
-    }
-}
-
-void Graph::bfs(){
-    bool visited[n] = {false};
-    queue<int> q;
-    q.push(0);
-    visited[0] = true;
-    while(!q.empty()){
-        int u = q.front();
-        q.pop();
-        cout << u << " ";
-        for(pair<int, int> p : G[u]){
-            int v = p.first;
-            if(!visited[v]){
-                visited[v] = true;
-                q.push(v);
-            }
-
-        }
-    }
-}
+#include "data_structures.h"
 
 /*
 ****************************************
@@ -153,6 +61,28 @@ void floyd_warshall(Graph graph){
     }
 }
 
+/*
+
+    Kruskal Minimum Spanning Tree
+    
+    edges -> array representing graph (just edges)
+    n -> vertices
+
+*/
+
+int kruskal(vector<Edge> edges, int n){
+    int cost = 0;
+    DSU dsu(n);
+    sort(edges.begin(), edges.end(), cmp_max);
+    for(Edge e: edges){
+        if(dsu.find_set(e.u) != dsu.find_set(e.v)){
+            cost += e.w;
+            dsu.union_sets(e.u, e.v);
+        }
+    }
+    return cost;
+}
+
 int main(){
 
     Graph graph(9, 10);
@@ -179,6 +109,15 @@ int main(){
     cout << "Shortest path using Floyd-Warshall's (" << 2 << "->" << 8 << "): ";
     floyd_warshall(graph);
     cout << graph.adj[2][8] << endl;
+
+    // Kruskal Example
+    vector<Edge> edges = {
+        Edge(1, 2, 96),
+        Edge(1, 3, 9),
+        Edge(2, 3, 79)
+    };
+
+    cout << kruskal(edges, 3) << endl;
 
     return 0;
 }
