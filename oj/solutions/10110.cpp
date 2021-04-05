@@ -14,7 +14,7 @@
 #define mp make_pair
 #define MAX 1000010
 #define MOD 1000000007
-#define oo 0x7fffffff
+#define oo 4294967295
 #define lld long long int
 #define endl '\n'
 using namespace std;
@@ -22,35 +22,21 @@ using namespace std;
 int main() {
 
 	fastio;
-	int n;
-	cin >> n;
 
-	int a[n];
-
-	rep(i, 0, n)
-		cin >> a[i];
-
-	int l=0, r=n-1;
-
-	int s=0, d=0;
-	bool turn = true;
-	while(l <= r){
-		int v = 0;
-		if(a[l] > a[r]){
-			v = a[l];
-			l++;
-		}else{
-			v = a[r];
-			r--;
-		}
-		if(turn)
-			s += v;
-		else
-			d += v;
-		turn = !turn;
+	vector<lld> v = {1};
+	lld s = 3;
+	while(v[v.size()-1] <= oo){
+		v.pb(v[v.size()-1]+s);
+		s += 2;
 	}
-
-	cout << s << " " << d << endl;
+	lld n;
+	while(cin >> n && n){
+		size_t pos = lower_bound(v.begin(), v.end(), n) - v.begin();
+		if(pos < v.size() && v[pos] == n)
+			cout << "yes\n";
+		else
+			cout << "no\n";
+	}
 
 	return 0;
 }

@@ -19,21 +19,20 @@
 #define endl '\n'
 using namespace std;
 
-int main() {
+int gcd(int a, int b){
+	return b == 0 ? a : gcd(b, a%b);
+}
+
+int main()
+{
 
 	fastio;
-	string a, b;
-	cin >> a >> b;
 
-	rep(i, 0, a.size()) a[i] = tolower(a[i]);
-	rep(i, 0, b.size()) b[i] = tolower(b[i]);
-
-	if(a < b)
-		cout << -1 << endl;
-	else if(a > b)
-		cout << 1 << endl;
-	else
-		cout << 0 << endl;
+	int a, b;
+	while(cin >> a >> b){
+		int g = gcd(a, b);
+		printf("%10d%10d    %s\n\n", a, b, (g == 1 ? "Good Choice" : "Bad Choice"));	
+	}
 
 	return 0;
 }
