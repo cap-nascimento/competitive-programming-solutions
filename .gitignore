@@ -6,8 +6,9 @@ contest/
 # Files
 in
 out
-a.out
-a.exe
+*.out
+*.exe
+*.class
 
 # IDE
 .vscode
