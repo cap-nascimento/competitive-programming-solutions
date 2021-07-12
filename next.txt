@@ -9,7 +9,6 @@ Goal: Acquire 100 solved problems to all categories
 	* 1941
 	* 1373
 	* 2697
-	* 2549
 	* 1530
 	* 1458
 	* 2669
