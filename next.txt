@@ -31,8 +31,6 @@ Goal: Acquire 100 solved problems to all categories
 
 5 - Math (3 remaining)
 
-	* 1909
-	* 1264
 	* 1697
 	* 1381
 	* 1531
