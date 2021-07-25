@@ -3,17 +3,7 @@
 Goal: Acquire 100 solved problems to all categories
 1 - Beginner Ok
 2 - Ad Hoc Ok
-3 - Strings (4 remaining)
-
-	* 1141
-	* 1941
-	* 1373
-	* 2697
-	* 1530
-	* 1458
-	* 2669
-	* 2824
-
+3 - Strings (Waiting for the emblem)
 4 - Data Structures (14 remaining)
 
 	* 1704
@@ -26,3 +16,5 @@ Goal: Acquire 100 solved problems to all categories
 	* 1538
 	* 2655
 	* 2560
+
+5 - Math Ok
