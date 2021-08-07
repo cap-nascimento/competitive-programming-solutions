@@ -3,18 +3,19 @@
 Goal: Acquire 100 solved problems to all categories
 1 - Beginner Ok
 2 - Ad Hoc Ok
-3 - Strings (Waiting for the emblem)
-4 - Data Structures (14 remaining)
+3 - Strings Ok
+4 - Data Structures (11 remaining)
 
-	* 1704
-	* 1425
-	* 2916
 	* 2658
 	* 2495
 	* 2855
 	* 1683
 	* 1538
+	* 1851
 	* 2655
+	* 1633
 	* 2560
+	* 1326
+	* 1594
 
 5 - Math Ok
