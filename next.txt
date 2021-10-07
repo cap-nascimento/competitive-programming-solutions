@@ -6,7 +6,8 @@ Goal: Acquire 100 solved problems to all categories
 3 - Strings Ok
 4 - Data Structures (11 remaining)
 
-	* 2658
+	* 3097
+        * 2658
 	* 2495
 	* 2855
 	* 1683
