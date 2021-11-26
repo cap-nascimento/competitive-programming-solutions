@@ -19,43 +19,69 @@
 #define endl '\n'
 using namespace std;
 
-double dist(ii a, ii b){
-	return sqrt((a.st - b.st)*(a.st - b.st) + (a.nd - b.nd)*(a.nd - b.nd));
+int make_sum(vi x){
+	int sum = 0;
+	rep(i, 0, x.size()-1) sum += (x[i] - x[i+1]);
+	return sum;
 }
 
 int main() {
 
 	fastio;
 
-	vector<ii> p(5);
-	p[0] = {0, 0};
-	cin >> p[1].st >> p[1].nd >> p[2].st >> p[2].nd;
+	int n;
+	cin >> n;
+	int x[n], y[n] = {0};
+	rep(i, 0, n) cin >> x[i];
+	vector<vi> seqs(n);
 
-	if(y[1] == y[2]){
-		x[3] = x[1];
-		x[4] = x[2];
-		y[3] = y[4] = y[1] + abs(x[1] - x[2]);
-	}else if(x[1] == x[2]){
-		x[3] = x[4] = x[1] + abs(y[1] - y[2]);
-		y[3] = y[1];
-		y[4] = y[2];
-	}else if(y[1] > y[2]){
-		double d = dist({x[1], y[1]}, {x[2], y[2]});
-		int l = sqrt((d*d)/2);
-		x[3] = x[1];
-		y[3] = y[1] - l;
-		x[4] = x[2];
-		y[4] = y[2] + l;
-	}else if(y[1] < p[2].nd){
-		double d = dist(p[1], p[2]);
-		int l = sqrt((d*d)/2);
-		x[3] = x[1];
-		y[3] = y[1] + l;
-		x[4] = x[2];
-		y[4] = y[2] - l;
+	rep(i, 0, n){
+		y[i] = 1;
+		seqs[i] = {x[i]};
+		while(seqs[i].size() < n){
+			int curr = seqs[i][seqs[i].size()-1];
+			int m = curr, k = 0;
+			rep(j, 0, n)if(!y[j]){
+				m -= x[j];
+				k = j;
+				break;
+			}
+			rep(j, 0, n) if(!y[j]){
+				if(curr - x[j] > m){
+					m = curr - x[j];
+					k = j;
+				}
+			}
+			y[k] = 1;
+			seqs[i].pb(x[k]);
+		}
+		rep(j, 0, n) y[j] = 0;
 	}
 
-	cout << x[3] << " " << y[3] << " " << x[4] << " " << y[4] << endl;
+	int k = 0;
+	int sum = make_sum(seqs[0]);
+	cout << "-->" << sum << endl;
+	rep(i, 1, n){
+		int csum = make_sum(seqs[i]);
+		cout << csum << endl;
+		if(csum > sum){
+			sum = csum;
+			k = i;
+		}		
+	}
+	
+	vector<vi> largest;
+	rep(i, 0, n){
+		int csum = make_sum(seqs[i]);
+		if(csum == sum){
+			largest.pb(seqs[i]);
+		}
+	}
+
+	rep(i, 0, largest.size()){
+		rep(j, 0, n) cout << largest[i][j] << " ";
+		cout << endl;
+	}
 
 	return 0;
 }

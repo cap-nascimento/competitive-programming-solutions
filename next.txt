@@ -4,10 +4,10 @@ Goal: Acquire 100 solved problems to all categories
 1 - Beginner Ok
 2 - Ad Hoc Ok
 3 - Strings Ok
-4 - Data Structures (11 remaining)
+4 - Data Structures (10 remaining)
 
 	* 3097
-        * 2658
+    * 2658
 	* 2495
 	* 2855
 	* 1683
@@ -17,6 +17,5 @@ Goal: Acquire 100 solved problems to all categories
 	* 1633
 	* 2560
 	* 1326
-	* 1594
 
 5 - Math Ok
