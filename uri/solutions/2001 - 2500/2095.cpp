@@ -12,24 +12,34 @@
 #define nd second
 #define pb push_back
 #define mp make_pair
-#define MAX 100010
+#define MAX 110
 #define MOD 1000000007
 #define oo 0x7fffffff
-#define lld unsigned long long int
+#define lld long long int
 #define endl '\n'
 using namespace std;
 
 int main() {
 
 	fastio;
+	
+	int n;
+	cin >> n;
+	vi Q(n), N(n);
 
-	int b, g;
-	cin >> b >> g;
-	int n = floor(g/2.0);
-	if(b >= n)
-		cout << "Amelia tem todas bolinhas!\n";
-	else
-		cout << "Faltam " << n-b << " bolinha(s)\n";
+	rep(i, 0, n) cin >> Q[i];
+	rep(i, 0, n) cin >> N[i];
+	sort(Q.begin(), Q.end());
+	sort(N.begin(), N.end());
+	
+	int ans = 0, k = 0;
+	rep(i, 0, n){
+		int pos = upper_bound(N.begin()+k, N.end(), Q[i]) - N.begin();
+		if(pos < n){
+			ans++; k = pos+1;
+		}
+	}
+	cout << ans << endl;
 
 	return 0;
 }

@@ -12,24 +12,47 @@
 #define nd second
 #define pb push_back
 #define mp make_pair
-#define MAX 100010
+#define MAX 110
 #define MOD 1000000007
 #define oo 0x7fffffff
-#define lld unsigned long long int
+#define lld long long int
 #define endl '\n'
 using namespace std;
+
+int R, K;
+vector<vi> G(MAX);
+
+int solve(){
+	int dp[K+1] = {0};
+	dp[0] = 1;
+	rep(i, 1, R+1){
+		for(int j=K;j>=(int)G[i].size();j--){
+			if(dp[j - G[i].size()] == 1){
+				dp[j] = 1;
+			}
+		}
+	}
+	return dp[K];
+}
 
 int main() {
 
 	fastio;
 
-	int b, g;
-	cin >> b >> g;
-	int n = floor(g/2.0);
-	if(b >= n)
-		cout << "Amelia tem todas bolinhas!\n";
-	else
-		cout << "Faltam " << n-b << " bolinha(s)\n";
+	while(cin >> R >> K){
+		rep(i, 0, MAX) G[i].resize(0);
+		rep(i, 0, K){
+			int a, b;
+			cin >> a >> b;
+			G[a].pb(b);
+			G[b].pb(a);
+		}
+
+		if(solve())
+			cout << "S\n";
+		else
+			cout << "N\n";
+	}
 
 	return 0;
 }

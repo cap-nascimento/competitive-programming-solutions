@@ -12,10 +12,10 @@
 #define nd second
 #define pb push_back
 #define mp make_pair
-#define MAX 100010
+#define MAX 110
 #define MOD 1000000007
 #define oo 0x7fffffff
-#define lld unsigned long long int
+#define lld long long int
 #define endl '\n'
 using namespace std;
 
@@ -23,13 +23,36 @@ int main() {
 
 	fastio;
 
-	int b, g;
-	cin >> b >> g;
-	int n = floor(g/2.0);
-	if(b >= n)
-		cout << "Amelia tem todas bolinhas!\n";
-	else
-		cout << "Faltam " << n-b << " bolinha(s)\n";
+	string n;
+	cin >> n;
+	rep(i, 0, n.size()){	
+		int j = i;
+		if(n[i] == '3' || n[i] == '5'){
+			while(j > 0){
+				if(n[j-1] - n[j] == 2){
+					swap(n[j-1], n[j]);
+					j--;
+				}else break;
+			}
+		}
+	}
+	int pos = -1;
+	rep(i, 0, n.size()) {
+		if(n[i] == '7'){ pos = i; break;}
+	}
+	if(pos!=-1){
+		rep(i, pos+1, n.size()){
+			if(n[i] == '5'){
+				int j = i;
+				while(j > pos){
+					swap(n[j], n[j-1]);
+					j--;
+				}
+				pos++;
+			}
+		}
+	}
+	cout << n << endl;
 
 	return 0;
 }
