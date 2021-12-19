@@ -12,7 +12,7 @@
 #define nd second
 #define pb push_back
 #define mp make_pair
-#define MAX 100010
+#define MAX 1010
 #define MOD 1000000007
 #define oo 0x7fffffff
 #define lld unsigned long long int
@@ -23,13 +23,18 @@ int main() {
 
 	fastio;
 
-	int b, g;
-	cin >> b >> g;
-	int n = floor(g/2.0);
-	if(b >= n)
-		cout << "Amelia tem todas bolinhas!\n";
-	else
-		cout << "Faltam " << n-b << " bolinha(s)\n";
+	int n, m;
+	cin >> n >> m;
+	vi a(n+1);
+	rep(i, 0, n) cin >> a[i];
+	a[n] = 42195;
+
+	bool ans = true;
+	for(int i=0;i<n && ans;i++)
+		if(a[i+1]-a[i] > m) ans = false;
+	
+	if(ans) cout << "S\n";
+	else cout << "N\n";
 
 	return 0;
 }
