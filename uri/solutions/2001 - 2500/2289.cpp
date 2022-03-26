@@ -23,16 +23,21 @@ int main() {
 
 	fastio;
 
-	int e, f, c;
-	cin >> e >> f >> c;
-
-	int b = e + f, ans = 0;
-	while(b >= c){
-		ans += b/c;
-		b = b/c + b%c;
+	lld x, y;
+	while(cin >> x >> y && (x || y)){
+		int a[64] = {0};
+		int b[64] = {0};
+		int i = 0;
+		while(x > 0 || y > 0){
+			a[i] = x%2; x/=2;
+			b[i] = y%2; y/=2;
+			i++;
+		}
+		int ans = 0;
+		rep(i, 0, 64)
+			if(a[i] != b[i]) ans++;
+		cout << ans << endl;
 	}
-
-	cout << ans << endl;
 
 	return 0;
 }

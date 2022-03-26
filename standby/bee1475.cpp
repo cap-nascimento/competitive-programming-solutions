@@ -19,20 +19,33 @@
 #define endl '\n'
 using namespace std;
 
+int N, C, T1, T2;
+
 int main() {
 
 	fastio;
 
-	int e, f, c;
-	cin >> e >> f >> c;
+	while(cin >> N >> C >> T1 >> T2){
+		int a[N];
+		rep(i, 0, N) cin >> a[i];
 
-	int b = e + f, ans = 0;
-	while(b >= c){
-		ans += b/c;
-		b = b/c + b%c;
+		if(N == 1)
+			cout << min(T1, T2) << endl;
+		else {
+            int ans = 0;
+			rep(i, 0, N) {
+				int j = i+1;
+                while(a[j] - a[i] <= max(T1, T2) && j < N) j++;
+                j--;
+                if(i == j)
+                    ans += min(T1, T2);
+                else
+                    ans += max(T1, T2);
+                i = j;
+			}
+            cout << ans << endl;
+		}
 	}
-
-	cout << ans << endl;
 
 	return 0;
 }

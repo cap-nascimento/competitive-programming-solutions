@@ -23,16 +23,13 @@ int main() {
 
 	fastio;
 
-	int e, f, c;
-	cin >> e >> f >> c;
+	string a, b;
+	cin >> a >> b;
 
-	int b = e + f, ans = 0;
-	while(b >= c){
-		ans += b/c;
-		b = b/c + b%c;
-	}
-
-	cout << ans << endl;
+	if(a.size() >= b.size())
+		cout << "go\n";
+	else
+		cout << "no\n";
 
 	return 0;
 }

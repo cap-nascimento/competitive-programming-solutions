@@ -23,16 +23,11 @@ int main() {
 
 	fastio;
 
-	int e, f, c;
-	cin >> e >> f >> c;
+	int n;
+	cin >> n;
 
-	int b = e + f, ans = 0;
-	while(b >= c){
-		ans += b/c;
-		b = b/c + b%c;
-	}
-
-	cout << ans << endl;
+	cout << (n%2 == 0 ? (n*n)/2 : ((n*n)/2) + 1) 
+	<< " casas brancas e " << (n*n)/2 << " casas pretas\n";
 
 	return 0;
 }
