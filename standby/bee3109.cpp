@@ -23,6 +23,33 @@ using namespace std;
 
 int main() {
 
-	fastio;
+	fastio;		
+
+	int n, q;
+	map<int, vi> emp;
+
+	cin >> n;
+	rep(i, 0, n) emp[i+1] = vi();
+	cin >> q;
+	while(q--) {
+		int e;
+		cin >> e;
+		if(e == 1) {
+			int a, b;
+			cin >> a >> b;
+			emp[a].pb(b);
+			emp[b].pb(a);
+		} else {
+			int a;
+			cin >> a;
+			if(emp[a].size() == 0)
+				cout << 0 << endl;
+			else if(emp[a][emp[a].size()-1] == a)
+				cout << 0 << endl;
+			else
+				cout << emp[a].size() << endl;
+		}
+	}
+
 	return 0;
 }
