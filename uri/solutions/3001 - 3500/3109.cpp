@@ -29,7 +29,11 @@ int main() {
 	map<int, vi> emp;
 
 	cin >> n;
-	rep(i, 0, n) emp[i+1] = vi();
+	int d[n+1];
+	rep(i, 0, n){
+		emp[i+1] = vi();
+		d[i+1] = i+1;
+	}
 	cin >> q;
 	while(q--) {
 		int e;
@@ -37,17 +41,20 @@ int main() {
 		if(e == 1) {
 			int a, b;
 			cin >> a >> b;
-			emp[a].pb(b);
-			emp[b].pb(a);
+			d[a] = (emp[b].size() == 0 ? b : emp[b][emp[b].size()-1]);
+			d[b] = (emp[a].size() == 0 ? a : emp[a][emp[a].size()-1]);
+			emp[a].pb(d[a]);
+			emp[b].pb(d[b]);
 		} else {
 			int a;
 			cin >> a;
-			if(emp[a].size() == 0)
-				cout << 0 << endl;
-			else if(emp[a][emp[a].size()-1] == a)
-				cout << 0 << endl;
-			else
-				cout << emp[a].size() << endl;
+			int ans = 0, x = d[a];
+			while(x != a){
+				vi v = emp[x];
+				x = v[v.size()-1];
+				ans++;
+			}
+			cout << ans << endl;
 		}
 	}
 
